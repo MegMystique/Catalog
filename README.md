@@ -2,6 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.5.
 
+## Install
+
+Install nvm:
+
+`sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+source ~/.bashrc`
+
+Install node 7.5:
+
+`nvm install 7.5`
+`nvm use 7.5`
+`nvm alias default node`
+
+Install angular-cli:
+
+`npm install -g @angular/cli`
+
+## Start
+`npm install`  - один раз для построения зависимостей
+
+`ng serve`  - для запуска
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
