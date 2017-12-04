@@ -13,16 +13,18 @@ export class BoroComponent implements OnInit, OnDestroy {
   view: string = 'card';
   sortType: string;
   cards = [];
-  page = 1;
+  pages = 1;
   treeCards = [];
   tree = [];
+  pageArray=[];
+  loading:boolean=false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private dateService: DataService, private streamService: DataStreamService) {
   }
 
   ngOnInit() {
-
+    this.loading=true;
     this.streamService.treeCardsChanges
       .takeUntil(this.ngUnsubscribe)
       .subscribe(cards => {
@@ -31,8 +33,17 @@ export class BoroComponent implements OnInit, OnDestroy {
       });
     this.streamService.cardsChanges
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(cards => this.cards = cards);
-    this.dateService.getDataFromServer()
+      .subscribe(cards => {this.cards = cards;this.loading=false});
+
+    this.streamService.pagesChanges
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(pages => {
+        this.pages = pages;
+        this.pageArray = Array.apply(null, {length: this.pages}).map((value, index) => index + 1);
+
+      });
+    this.dateService.getDataFromServer();
+
   }
 
   resetCards() {
@@ -65,9 +76,4 @@ export class BoroComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  updatePage() {
-    //this.ngOnInit()
-    // this.streamService.getPages()
-
-  }
 }

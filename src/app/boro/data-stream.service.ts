@@ -27,8 +27,8 @@ export class DataStreamService {
     this.cards = cards; //карточки на странице
     this.baseCard = cards; //карточки с "сервера"
     this.workCards = cards; //список с текущим состоянием карточек (без удаленных)
-    this.treeCardsChanges.next(this.baseCard.slice());
     this.getPages();
+    this.treeCardsChanges.next(this.baseCard.slice());
     this.updatePage(this.currentPage)
   }
 
