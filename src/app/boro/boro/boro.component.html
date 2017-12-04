@@ -1,0 +1,30 @@
+<p>
+  <input type="radio" value="card" name="type" [(ngModel)]="view" (click)="updatePage()"> В виде карточек
+  <input type="radio" value="tree" name="type" [(ngModel)]="view"> Древовидный список
+
+</p>
+<div class="container-fluid" *ngIf="view==='card'">
+  <p>Сортировать:
+    <input type="radio" value="date" name="type" [(ngModel)]="sortType" (click)="sortCards('date')"> По дате
+    <input type="radio" value="size" name="type" [(ngModel)]="sortType" (click)="sortCards('size')"> По размеру файла
+  </p>
+  <div class="row" *ngIf="cards.length">
+    <app-card *ngFor="let card of cards" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" [card]="card"></app-card>
+
+  </div>
+  <div class="row" *ngIf="!cards.length">
+    <div class="alert alert-warning" role="alert">
+      Нет карточек на данной странице
+    </div>
+
+  </div>
+  <button class="btn btn-dark btn-sm float-right" (click)="resetCards()">Сбросить</button>
+
+</div>
+
+<div class="container-fluid" *ngIf="view==='tree'">
+  <app-tree-view *ngFor="let category of tree" [category]="category"></app-tree-view>
+
+</div>
+<!--Плохая реализация, найти в чем проблема на самом деле-->
+<app-pages [ngClass]="{no:view==='tree'}"></app-pages>
