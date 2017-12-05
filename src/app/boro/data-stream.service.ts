@@ -13,6 +13,7 @@ export class DataStreamService {
   lastIndex = 10;
   cardsByPage = 12;
   currentPage = 1;
+  img = 'code/BKWZJHXR57.jpg';
 
   constructor() {
   }
@@ -26,20 +27,25 @@ export class DataStreamService {
     });
     this.cards = cards; //карточки на странице
     this.baseCard = cards; //карточки с "сервера"
-    this.workCards = cards; //список с текущим состоянием карточек (без удаленных)
+    let cat = JSON.parse(localStorage.getItem("cardsArray"));
+    this.workCards=cat&&cat.length?cat:cards;
+    //this.workCards = cards; //список с текущим состоянием карточек (без удаленных)
     this.getPages();
     this.treeCardsChanges.next(this.baseCard.slice());
     this.updatePage(this.currentPage)
+
   }
 
   deleteCard(cardDelete) {
     this.workCards = this.workCards.filter(card => card !== cardDelete);
     this.updatePage(this.currentPage);
+    localStorage.setItem('cardsArray', JSON.stringify(this.workCards));
     this.getPages()
   }
 
   getBaseCard() {
     this.workCards = this.baseCard.slice();
+    localStorage.setItem('cardsArray', JSON.stringify(this.workCards));
     this.updatePage(this.currentPage);
     this.getPages()
   }
@@ -72,5 +78,6 @@ export class DataStreamService {
     let pages = this.workCards.length % this.cardsByPage > 0 ? Math.floor(this.workCards.length / this.cardsByPage) + 1 : Math.floor(this.workCards.length / this.cardsByPage);
     this.pagesChanges.next(pages);
   }
+
 
 }

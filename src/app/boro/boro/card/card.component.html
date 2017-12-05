@@ -1,15 +1,10 @@
 <div (mouseenter)="card.showCloseButton=true" (mouseleave)="card.showCloseButton=false" class="position-relative">
   <br>
   <!--Переписать когда нормальный доступ будет-->
-  <img src="../../../../assets/img/cars/9VGI5ELN5Y.jpg" *ngIf="card.category=='car'">
-  <img src="../../../../assets/img/coffee/WVJKEELOR6.jpg" *ngIf="card.category=='coffee'">
-  <img src="../../../../assets/img/computer/8PUO9PFLV2.jpg" *ngIf="card.category=='computer'">
-  <img src="../../../../assets/img/map/ENXQWBKL99.jpg" *ngIf="card.category=='map'">
-  <img src="../../../../assets/img/work/TD1JOZO7IX.jpg" *ngIf="card.category=='work'">
-  <img src="../../../../assets/img/code/DKNN0YHNEE.jpg" *ngIf="card.category=='code'">
+  <img src="http://93.91.165.233:8081/frontend_data/{{card.image}}" alt="{{card.image}}">
   <button type="button" class="close position-absolute inner" aria-label="Close" *ngIf="card.showCloseButton"
           (click)="closeCard(card)">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div>Дата:{{card.timestamp}}, размер- {{card.filesize}}</div>
+  <div>{{card.id}}Дата:{{card.timestamp}}, размер- {{card.filesize}}</div>
 </div>

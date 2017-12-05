@@ -16,6 +16,7 @@ export class BoroComponent implements OnInit, OnDestroy {
   pages = 1;
   treeCards = [];
   tree = [];
+  currentPage=1;
   pageArray=[];
   loading:boolean=false;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -75,5 +76,4 @@ export class BoroComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
 }
